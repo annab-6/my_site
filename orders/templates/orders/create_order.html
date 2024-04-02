@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+{% load static %}
+{% load cart_tags %}
+
+{% block content %}
+    <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col">
+            <div class="card card-registration card-registration-2" style="border-radius: 15px;">
+                <div class="card-body p-0">
+                    <div class="row g-0">
+                        <div class="col-md-6 bg-grey">
+                            <div class="p-5">
+                                <h3 class="fw-bold mb-lg-1 mt-1  text-center" style="font-style: italic;">
+                                    Ｏｒｄｅｒ Ｄｅｔａｉｌｓ</h3>
+                                <div class="card mb-2">
+                                    <div class="card-body">
+                                        <form action="{% url 'orders:create_order' %}" method="post">
+                                            {% csrf_token %}
+                                            <div class="row">
+                                                <div class="col-md-6 mb-3">
+                                                    <label for="id_first_name" class="form-label">𝘕𝘢𝘮𝘦:</label>
+                                                    <input type="text" class="form-control" id="id_first_name"
+                                                           value="{% if form.first_name.value %}{{ form.first_name.value }}{% endif %}"
+                                                           name="first_name" 
+                                                           required>
+                                                    {% if form.first_name.errors %}
+                                                        <div class="alert alert-danger alert-dismissible fade show">{{ form.first_name.errors }}</div>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="col-md-6 mb-3">
+                                                    <label for="id_last_name" class="form-label">𝘓𝘢𝘴𝘵 𝘯𝘢𝘮𝘦:</label>
+                                                    <input type="text" class="form-control" id="id_last_name"
+                                                           name="last_name"
+                                                           value="{% if form.last_name.value %}{{ form.last_name.value }}{% endif %}"
+                                                           required>
+                                                    {% if form.last_name.errors %}
+                                                        <div class="alert alert-danger alert-dismissible fade show">{{ form.last_name.errors }}</div>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="col-md-8 mb-4">
+                                                    <label for="id_phone_number" class="form-label">𝘗𝘩𝘰𝘯𝘦 𝘯𝘶𝘮𝘣𝘦𝘳:</label>
+                                                    <input type="text" class="form-control" id="id_phone_number" name="phone_number"
+                                                           value="{% if form.phone_number.value %}{{ form.phone_number.value }}{% endif %}"
+                                                           placeholder="Format: 111-111-11-11" 
+                                                           required>
+                                                    {% if form.phone_number.errors %}
+                                                        <div class="alert alert-danger alert-dismissible fade show">{{ form.phone_number.errors }}</div>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="col-md-8 mb-4">
+                                                    <label for="delivery" class="form-label">𝘋𝘦𝘭𝘪𝘷𝘦𝘳𝘺 𝘮𝘦𝘵𝘩𝘰𝘥: </label>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio"
+                                                               name="requires_delivery"
+                                                               id="id_requires_delivery" value="1" checked>
+                                                        <label class="form-check-label" for="id_requires_delivery">With
+                                                            delivery</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio"
+                                                               name="requires_delivery"
+                                                               id="id_requires_delivery" value="0">
+                                                        <label class="form-check-label" for="id_requires_delivery">Pickup</label>
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3" id="deliveryAddressField">
+                                                    <label for="id_delivery_address" class="form-label">𝘋𝘦𝘭𝘪𝘷𝘦𝘳𝘺
+                                                        𝘢𝘥𝘳𝘦𝘴𝘴</label>
+                                                    <textarea class="form-control" id="id_delivery_address"
+                                                              value="{% if form.delivery_address.value %}{{ form.delivery_address.value }}{% endif %}"
+                                                              name="delivery_address" rows="2"></textarea>
+                                                    {% if form.delivery_address.errors %}
+                                                        <div class="alert alert-danger alert-dismissible fade show">{{ form.delivery_address.errors }}</div>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="col-md-8 mb-3">
+                                                    <label class="form-label">Payment method: </label>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio"
+                                                               name="payment_on_get"
+                                                               id="id_payment_on_get" value="0" checked>
+                                                        <label class="form-check-label" for="id_payment_on_get">Payment by card</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio"
+                                                               name="payment_on_get"
+                                                               id="id_payment_on_get" value="1">
+                                                        <label class="form-check-label" for="id_payment_on_get">Cash/card upon receipt</label>
+                                                        {% if form.payment_on_get.errors %}
+                                                            <div class="alert alert-danger alert-dismissible fade show">{{ form.payment_on_get.errors }}</div>
+                                                        {% endif %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex justify-content-center">
+                                                <button type="submit" class="btn btn-dark" style="width: 200px;">Make an order
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <div class="col-lg">
+                            <div class="p-1">
+                            </div>
+                            <div class="container" id="cart-items-container">
+                                <!-- Cart layout -->
+                                {% user_cart request as carts %}
+                                {% include "cart/includes/included_cart.html" %}
+                                <!-- The cart has finished marking -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+{% endblock %}

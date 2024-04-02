@@ -1,0 +1,247 @@
+body {
+  background-image: url("../images/bg-image.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center top;
+  background-size: cover;
+  height: 1000%;
+}
+
+.dropdown-toggle::after {
+  content: none;
+}
+
+.custom-shadow {
+  box-shadow: 5px 5px 25px 10px #6c757d;
+}
+
+.product_id {
+  color: rgb(128, 128, 128);
+  font-size: 15px;
+}
+
+.badge.bg-warning.text-dark {
+  position: absolute;
+  top: 10px;
+  right: 5px;
+  z-index: 1;
+  padding: 5px 10px;
+  border-radius: 3px;
+  font-size: 1rem;
+  box-shadow: 2px 2px 15px 9px #000000;
+}
+
+.badge-banner {
+  top: 80%;
+  border-radius: 15px;
+  font-size: 0.7rem;
+}
+
+
+.btn.btn-outline-primary {
+    color: black;
+    border-color: black;
+    background-color: transparent;
+    transition: background-color 0.3s;
+    border-radius: 20px;
+    padding: 10px 20px;
+}
+.btn.btn-outline-primary:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+    color: black;
+}
+
+.card {
+    height: 100%; /* Задайте высоту для карточки, чтобы они занимали одинаковое пространство */
+}
+
+
+card-body {
+    height: 100%; /* Задайте высоту для содержимого карточки */
+    display: flex; /* Используйте flexbox для выравнивания содержимого по вертикали */
+    flex-direction: column; /* Отображайте содержимое в столбец */
+    justify-content: space-between; /* Равномерно распределите пространство между элементами внутри карточки */
+}
+
+.pagination-custom .page-link {
+    color: black; /* Устанавливаем черный цвет текста для ссылок */
+}
+.pagination-custom .page-link:hover {
+    color: lightpink; /* Устанавливаем цвет текста при наведении на ссылки (по желанию) */
+}
+
+.pagination-custom {
+    margin-left: -110px; /* Негативный отступ влево */
+}
+
+.card-title {
+    color: black;
+    font-weight: bold;
+}
+
+.back-text {
+    color: black;
+}
+
+
+input:focus, textarea:focus, select:focus {
+    box-shadow: none !important;
+}
+
+.custom-notification {
+    background-color: #f8d7da; /* красный цвет фона */
+    color: #721c24; /* цвет текста */
+    border: 1px solid #f5c6cb; /* цвет границы */
+    border-radius: .25rem; /* скругление углов */
+    padding: .75rem 1.25rem; /* отступы внутри уведомления */
+    margin-top: 20px; /* отступ сверху */
+    position: relative;} /*
+
+/* Дополнительные стили */
+.bg-light-subtle {
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)); /* Градиентный фон */
+    padding: 20px 0; /* Внутренний отступ */
+}
+
+.content-heading {
+    font-size: 28px; /* Размер шрифта */
+    font-weight: bold; /* Полужирный шрифт */
+
+    color: #343a40; /* Цвет текста */
+    border-bottom: 1px solid #343a40; /* Линия с цветом текста */
+    padding-bottom: 20px; /* Отступ снизу для создания пространства между текстом и линией */
+}
+
+.content-text {
+    font-family: 'Snell Roundhand', cursive;
+    font-size: 18px; /* Размер шрифта */
+    color: #343a40; /* Цвет текста */
+    font-weight: normal; /* Полужирный шрифт */
+
+}
+
+
+.alert {
+    background-color: rgba(255, 255, 255, 0.9); /* Прозрачный белый фон */
+    color: black; /* Черный текст */
+    border: 1px solid rgba(0, 0, 0, 0.1); /* Подходящая прозрачная граница */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Прозрачная тень */
+}
+
+
+
+.custom-button {
+        background-color: black; /* Прозрачный цвет фона */
+        border: 1px solid transparent; /* Прозрачная граница */
+        color: white; /* Белый цвет текста */
+        border-radius: 20px; /* Радиус закругления углов */
+        padding: 5px 10px; /* Размер отступов внутри кнопки */
+        transition: background-color 0.3s, border-color 0.3s; /* Плавное изменение цвета при наведении */
+    }
+
+
+
+.navbar .mx-auto {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+/* Уменьшаем отступы внутри карточек */
+.card-body {
+    padding: 20px;
+}
+
+/* Уменьшаем размеры элементов формы */
+.form-control {
+    padding: 6px 12px;
+    font-size:14px;
+}
+
+/* Уменьшаем размер кнопок */
+.btn {
+    padding: 6px 12px;
+    font-size: 14px;
+
+.form-label {
+    font-size: 18px;
+}
+
+
+@media (min-width: 1025px) {
+.h-custom {
+height: 100vh !important;
+}
+}
+
+.card-registration .select-input.form-control[readonly]:not([disabled]) {
+font-size: 1rem;
+line-height: 13.15;
+padding-left: .75em;
+padding-right: .75em;
+}
+
+.card-registration .select-arrow {
+top: 13px;
+}
+
+.bg-grey {
+background-color: #eae8e8;
+}
+
+@media (min-width: 992px) {
+.card-registration-2 .bg-grey {
+border-top-right-radius: 16px;
+border-bottom-right-radius: 16px;
+}
+}
+
+@media (max-width: 991px) {
+.card-registration-2 .bg-grey {
+border-bottom-left-radius: 16px;
+border-bottom-right-radius: 16px;
+}
+}
+
+
+.dropdown-menu .dropdown-item:hover {
+    background-color: white !important;
+    color: black !important;
+}
+
+.about-section {
+    padding: 50px 0;
+    text-align: center;
+}
+
+.about-heading {
+    font-size: 36px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.about-text {
+    font-size: 18px;
+    color: #666;
+    line-height: 1.6;
+}
+
+
+
+/* изменить цвет формы заказа  */
+.bg-grey {
+    background-color: #ffffff;
+}
+
+/* изменить цвет корзины */
+.card-registration-2 {
+    background-color: #ffffff;
+}
+
+
+.bg-gradient {
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.6));
+    /* 0 - прозрачность, 1 - непрозрачность */
+}
+}
+

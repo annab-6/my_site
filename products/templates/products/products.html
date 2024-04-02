@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+{% load static %}
+{% load products_tags %}
+
+{% block modal_cart %}
+    {% include "includes/cart_button.html" %}
+{% endblock %}
+
+
+{% block content %}
+    <div class="row">
+        <!-- Filters form -->
+        <div class="dropdown mb-2">
+            <button class="btn btn-secondary dropdown-toggle btn-dark" type="button" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                Ｆｉｌｔｅｒｓ
+            </button>
+
+            <form action="
+                    {% if request.GET.q %}{% url "products:search" %}{% else %}{% url "products:index" slug_url %}{% endif %}"
+                  method="get" class="dropdown-menu bg-dark" data-bs-theme="dark">
+                <div class="form-check text-white mx-3">
+                    <input class="form-check-input" type="radio" name="order_by" id="flexRadioDefault2" value="price">
+                    {% if request.GET.q %}
+                        <input type="hidden" name="q" value="{{ request.GET.q }}">
+                    {% endif %}
+                    <label class="form-check-label" for="flexRadioDefault2">
+                        From cheap to expensive
+                    </label>
+                </div>
+                <div class="form-check text-white mx-3">
+                    <input class="form-check-input" type="radio" name="order_by" id="flexRadioDefault3" value="-price">
+                    <label class="form-check-label" for="flexRadioDefault3">
+                        From expensive to cheap
+                    </label>
+                </div>
+                <button type="submit" class="btn btn-secondary mx-3 mt-3">Ａｐｐｌｙ</button>
+            </form>
+        </div>
+
+
+        {% if request.GET.q %}
+            <h3 class="mt-4">Results : {{ request.GET.q }}</h3>
+            {% if not products %}
+                <link rel="stylesheet" href="{% static "deps/css/my_footer_css.css" %}">
+                <div class="container d-flex flex-column justify-content-start- align-items-baseline vh-100">
+                    <div class="text-md-end">
+                        <h2 class="display-1 font-weight-bold">𝘕𝘰𝘵 𝘍𝘰𝘶𝘯𝘥</h2>
+                        <a href="#" onclick="history.back(); return false;" class="d-inline-block"
+                           style="color: black; font-weight: bold; font-style: italic; font-size: 1.5rem;"><i
+                                class="bi bi-arrow-left"></i> Back</a>
+                    </div>
+                </div>
+            {% endif %}
+        {% endif %}
+        {% for item in products %}
+            <!-- Product carts -->
+            <div class="col-lg-3 col-md-6 p-4">
+                <div class="card border-secondary rounded custom-shadow">
+                    {% if item.image %}
+                        <img src="{{ item.image.url }}" class="card-img-top" alt="{{ item.name }}">
+                    {% else %}
+                        <img src="{% static "deps/images/notfound.png" %}" class="card-img-top" alt="...">
+                    {% endif %}
+                    <div class="card-body">
+                        <a href="{% url "products:item" item.slug %}">
+                            <p class="card-title">{{ item.name }}</p>
+                        </a>
+                        <p class="card-text ">{{ item.description|truncatechars:25 }}</p>
+                        <p class="product_id">id:{{ item.display_id }}</p>
+                        <div class="d-flex justify-content-between">
+                            <p><strong>{{ item.price }} €</strong></p>
+                            <a href="{% url "cart:add_cart" %}" class="btn add-to-cart"
+                               data-product-id="{{ item.id }}">
+                                {% csrf_token %}
+                                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                                     class="bi bi-cart-plus-fill" viewBox="0 0 16 16">
+                                    <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0m7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0M9 5.5V7h1.5a.5.5 0 0 1 0 1H9v1.5a.5.5 0 0 1-1 0V8H6.5a.5.5 0 0 1 0-1H8V5.5a.5.5 0 0 1 1 0"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <!-- Pagination -->
+    {% if  products %}
+        <nav aria-label="Page navigation example" class="pagination-custom">
+            <ul class="pagination justify-content-center my-4">
+                <div class="small shadow  d-flex">
+                    <li class="page-item {% if not products.has_previous %}disabled{% endif %}">
+                        <a class="page-link" href="{% if products.has_previous %}?page=
+                            {{ products.previous_page_number }}{% else %}#{% endif %}">𝘉𝘢𝘤𝘬</a>
+                    </li>
+
+                    {% for page in products.paginator.page_range %}
+                        <li class="page-item"><a class="page-link" href="?page={{ page }}">{{ page }}</a></li>
+                    {% endfor %}
+
+                    <li class="page-item {% if not products.has_next %}disabled{% endif %}">
+                        <a class="page-link"
+                           href="{% if products.has_next %}?page={{ products.next_page_number }}{% else %}#{% endif %}">𝘕𝘦𝘹𝘵</a>
+                    </li>
+                </div>
+            </ul>
+        </nav>
+    {% endif %}
+{% endblock %}
+
+{% block footer %}
+    <footer class="py-4 bg-gray">
+        <div class="container">
+            <p class="m-0 text-center text-black">Copyright &copy;2024, HouseOfFragrance.com</p>
+        </div>
+    </footer>
+{% endblock %}

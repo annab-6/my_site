@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block modal_cart %}
+    {% include "includes/cart_button.html"%}
+{% endblock %}
+
+{% block content %}
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-4 bg-white p-4 mb-4 mx-3 rounded custom-shadow">
+            <h2 class="text-center mb-4">· 𝘈𝘶𝘵𝘩𝘰𝘳𝘪𝘻𝘢𝘵𝘪𝘰𝘯 ·</h2>
+
+            <form action="{% url 'users:login' %}" method="post">
+                {% csrf_token %}
+                {% if request.GET.next %}
+                    <input type="hidden" name="next" value="{{ request.GET.next }}">
+                {% endif %}
+
+                <div class="mb-3">
+                    <label for="id_username" class="form-label">𝘜𝘴𝘦𝘳𝘯𝘢𝘮𝘦</label>
+                    <input type="text" class="form-control"
+                           value="{% if form.username.value %}{{ form.username.value }}{% endif %}"
+                           name="username" id="id_username"
+                           placeholder="Enter your username">
+                </div>
+                <div class="mb-3">
+                    <label for="id_password" class="form-label">𝘗𝘢𝘴𝘴𝘸𝘰𝘳𝘥</label>
+                    <input type="password" class="form-control" name="password" id="id_password"
+                           placeholder="Enter your password">
+                </div>
+
+             <button type="submit" class="btn btn-dark d-block mx-auto" style="width: 200px;">Login</button>
+
+            </form>
+            <div class="mt-2">
+                <a href="#" class="text-dark">Forgot password?</a> | <a href="{% url 'users:registration' %}"
+                                                                        class="text-dark">Create an account</a>
+            </div>
+            <hr>
+            <div class="text-center">
+                <p>Or log in via:</p>
+                <a href="#" class="btn btn-dark">
+                    <img class="mx-1" src="{% static 'deps/icons/google.svg' %}" alt="Google Icon" width="16"
+                         height="16">
+                    Google
+                </a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static "deps/css/my_footer_css.css" %}">
+{% endblock %}
+
+{% block modal_cart %}
+    {% include "includes/cart_button.html" %}
+{% endblock %}
+
+{% block content %}
+    <h1 class="mt-5 pt-5"><strong>{{ content }}</strong></h1>
+{% endblock %}
+
+{% block footer %}
+    <footer class="py-2" style="background-color: rgba(0, 0, 0, 0.5);">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                </div>
+            </div>
+        </div>
+        <ul class="list-inline text-white text-center mb-0">
+            <li class="list-inline-item"><a class="text-white" href="#">Shipping and payment</a></li>
+            <li class="list-inline-item"><a class="text-white" href="#">Contacts</a></li>
+            <li class="list-inline-item"><a class="text-white" href="{% url "my_site:about" %}">About us</a></li>
+        </ul>
+        <p class="text-white text-center mb-0" style="font-size: 12px;">Copyright &copy;2024, HouseOfFragrance.com</p>
+    </footer>
+{% endblock %}

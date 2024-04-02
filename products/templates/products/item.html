@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block modal_cart %}
+    {% include "includes/cart_button.html" %}
+{% endblock %}
+
+{% block content %}
+    <div class="container mt-3">
+        <a href="#" onclick="history.back(); return false;" class="d-inline-block ml-auto"
+           style="color: black; font-weight: bold; font-style: italic;"><i class="bi bi-arrow-left"></i> Back</a>
+
+
+    </div>
+
+  <div class="container mt-5">
+    <div class="card mb-4 custom-shadow bg-light text-black">
+        <div class="row align-items-center">
+            <!-- Product image and description -->
+            <div class="col-md-3 col-sm-12">
+                <div class="card-body text-center">
+                    <img src="{{ item.image.url }}" class="img-thumbnail mb-3" data-bs-toggle="modal" data-bs-target="#imageModal1">
+                </div>
+            </div>
+            <div class="col-md-9 col-sm-12">
+                <div class="card-body">
+                     <h5 class="card-title text-bg-dark">{{ item.name }}</h5>
+                    <p class="card-text">{{ item.description }}</p>
+                    <p class="card-text">Price: {{ item.price }} €</p>
+                    <a href="{% url "cart:add_cart" %}" class="btn btn-light add-to-cart" data-product-id="{{ item.id }}">
+                        {% csrf_token %}
+                        Add to cart
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

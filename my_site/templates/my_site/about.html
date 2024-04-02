@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static "deps/css/my_footer_css.css" %}">
+{% endblock %}
+
+{% block modal_cart %}
+    {% include "includes/cart_button.html" %}
+{% endblock %}
+
+{% block content %}
+    <div class="container mt-2 pt-5 pb-5 bg-white">
+        <h2 class="content-heading text-center">{{ content }}</h2>
+        <p class="content-text text-dark">Welcome to House of Fragrance - your premier destination for exquisite scents.
+
+            Discover a curated selection of the finest perfumes from top brands, ensuring quality and elegance with
+            every purchase.
+
+            Experience the world of fragrance with us - simple, sophisticated, and unforgettable.</p>
+    </div>
+{% endblock %}
+
+{% block footer %}
+    <footer class="py-4 bg-gray">
+        <div class="container">
+            <p class="footer-text m-0 text-center">Copyright &copy;2024, HouseOfFragrance.com</p>
+        </div>
+    </footer>
+{% endblock %}
